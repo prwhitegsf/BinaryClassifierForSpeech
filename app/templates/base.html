@@ -25,35 +25,40 @@
   
   
     <body>
-       
+        
+
+        <div class="container mt-3",style="justify-content: start;">
+            <nav class="navbar">
     
-        <nav class="navbar">
+
         
             
-            <div class="hamburger">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-            
-            <ul class="nav-menu">
-                <li><a href="{{ url_for('main.introduction') }}">Introduction</a></li>
-                <li><a href="{{ url_for('main.data_inspector') }}">Data Inspector</a></li>
-                <li><a href="{{ url_for('main.about_features') }}">Understanding Feature Extraction</a></li>
-                <li><a href="{{ url_for('main.feature_extractor') }}">Interactive Feature Extractor</a></li>
-                <li><a href="{{ url_for('main.about_estimators') }}">Understanding Estimators</a></li>
-                <li><a href="{{ url_for('main.class_selector') }}">Interactive Class Selection</a></li>
-                <li><a href="{{ url_for('main.observations') }}">Observations and Additional Resources</a></li>
-            </ul>
-        </nav>
-
-        <div class="container mt-3">
-            
+                <div class="hamburger">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+               <h3 class="'title">{{ title_text}}</h3>
+                
+                <ul class="nav-menu">
+                    <li><a href="{{ url_for('main.introduction') }}">Introduction</a></li>
+                    <li><a href="{{ url_for('main.data_inspector') }}">Data Inspector</a></li>
+                    <li><a href="{{ url_for('main.about_features') }}">Understanding Feature Extraction</a></li>
+                    <li><a href="{{ url_for('main.feature_extractor') }}">Interactive Feature Extractor</a></li>
+                    <li><a href="{{ url_for('main.about_estimators') }}">Understanding Estimators</a></li>
+                    <li><a href="{{ url_for('main.class_selector') }}">Interactive Class Selection</a></li>
+                    <li><a href="{{ url_for('main.observations') }}">Observations and Additional Resources</a></li>
+                </ul>
+                
+            </nav>
             {% block content %}
             
             {% endblock %}
         
         </div>
+        
+
+
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

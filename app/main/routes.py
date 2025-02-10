@@ -15,7 +15,8 @@ from app.main.utils.estimator_evaluation import EvaluateResults
 @bp.route('/index', methods=['GET'])
 @bp.route('/introduction',methods=['GET'])
 def introduction():
-     return render_template('introduction.html')
+     return render_template('introduction.html',
+                            title_text='Exploring Simple Binary Classification for Speech')
 
 
 
@@ -25,7 +26,8 @@ def data_inspector():
                             sex_distro='distro_img/actor-sex.png',
                             emotion_distro='distro_img/emotions.png',
                             phrase_distro='distro_img/phrase.png',
-                            intensity_distro='distro_img/intensity.png')
+                            intensity_distro='distro_img/intensity.png',
+                            title_text='Data Inspection')
 
 
 
@@ -37,7 +39,8 @@ def about_features():
                            mel_spectro='feature_img/mel-spectro.png',
                            mel_filters='feature_img/mel-filters.png',
                            mfcc='feature_img/mfcc.png',
-                           mfcc_process='feature_img/mfcc-flow.png')
+                           mfcc_process='feature_img/mfcc-flow.png',
+                           title_text='Understanding Feature Extraction')
 
 
 
@@ -75,7 +78,8 @@ def feature_extractor():
         next_button=next_button, 
         record_count_text=s.message,
         record_text=s.curr_record_info,
-        record_id=s.curr_id)
+        record_id=s.curr_id,
+        title_text='Feature Extractor')
 
 
 
@@ -84,7 +88,8 @@ def about_estimators():
     return render_template('about-estimators.html',
                            hyperplanes='est_img/hyperplanes.png',
                            kernels='est_img/kernels.png',
-                           conf_matrix='est_img/conf-matrix.png')
+                           conf_matrix='est_img/conf-matrix.png',
+                           title_text='Estimators and measuring performance')
 
 
 @bp.route('/class-selector',methods=['GET','POST'])
@@ -134,7 +139,8 @@ def class_selector():
         train_and_test=train_and_test,
         record_count_text=s.message, 
         record_text=s.curr_record_info,
-        record_id=s.curr_id)
+        record_id=s.curr_id,
+        title_text='Class Selector')
 
 
 @bp.route('/estimator-results',methods=['GET','POST'])
@@ -169,9 +175,11 @@ def view_estimator_results():
                            knn_scores=er.get_scores_from_conf_matrix(knn_conf_matrix),
                            svc_res=er.get_results_from_conf_matrix(svc_conf_matrix),
                            linsvc_res=er.get_results_from_conf_matrix(linsvc_conf_matrix),
-                           knn_res=er.get_results_from_conf_matrix(knn_conf_matrix))
+                           knn_res=er.get_results_from_conf_matrix(knn_conf_matrix),
+                           title_text='Estimator Results')
 
 
 @bp.route('/observation',methods=['GET'])
 def observations():
-    return render_template('observations.html')
+    return render_template('observations.html',
+                            title_text='Observations and Additional Resources')

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Estimator Results</h1>
+
 
     <div class="content",style=>
         <div class="content-info">
@@ -12,17 +12,13 @@
             {% endfor %}
             </div>
             
-                <h5>Next:</h5>
-                <div class="text-box">
-                <p>Continue to <a href="{{ url_for('main.observations') }}">Observations and Additional Resources</a>.</p>
-                <p>Or, go back to the <a href="{{ url_for('main.class_selector') }}">class selector</a> and make another selection.</p>
-            </div>
+               
         
         </div>
         
         <div class="content-viz">
             <p id="'svc-results">
-                SVC Results<br>
+               <h6> SVC-RBF Results</h6><br>
                 <div class="estimator-results">
                     
                     <div class="conf-matrix">
@@ -55,7 +51,7 @@
             </p> 
 
             <p>
-            LinearSVC Results<br>
+           <h6> SVC-Linear Results</h6><br>
             <div class="estimator-results">
                 <div class="conf-matrix">
                     <table>
@@ -90,7 +86,7 @@
             </p>
 
             <p>
-                K Nearest Neighbor Results<br>
+               <h6> K Nearest Neighbor Results</h6><br>
                 <div class="estimator-results">
                     <div class="conf-matrix">
                         <table>
@@ -120,6 +116,11 @@
                     </div>
                 </div>
             </p>
+            <h6>Next:</h6>
+            <div class="text-box">
+            <p>Continue to <a href="{{ url_for('main.observations') }}">Observations and Additional Resources</a>.</p>
+            <p>Or, go back to the <a href="{{ url_for('main.class_selector') }}">class selector</a> and make another selection.</p>
+        </div>
         </div>  
 
     </div>

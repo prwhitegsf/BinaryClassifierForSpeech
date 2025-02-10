@@ -2,8 +2,7 @@
 {% block content %}
 <div class="info-container">
     <div class="info-column">
-        <h3>Observations and Additional Resources</h3>
-        <br>
+
 
     <h4>Feature Types and Resolution</h4>
     <p>Training and testing on mfcc features resulted in better performance across almost all classification tasks than training/testing on mel spectrograms, especially with the SVC-RBF model. Given that we are working with speech data, where the information tends to be encoded in the phenomes and formants, this makes sense. MFCCs specifically capture and highlight that information.</p>
@@ -38,7 +37,7 @@
     <ul>
         <li>For example: for actors we train and test the model to identify each of the 24 actors individually and then average the results.</li>
     </ul>
-
+<br>
     <h4>Averaged Results by Class</h4>
 <br>
     <h5>MFCC</h5>
@@ -157,7 +156,7 @@
         </tr>
     </table>
     <br><br>
-    <h4>Averaged Results for Each Emotion</h4>
+    <h4>Averaged Results for Each Emotion</h4><br>
     <p>As with the above, all other class types were set to "all" as we trained and tested the model on each emotional label individually.</p>
 
     <h5>MFCC</h5>
@@ -330,22 +329,22 @@
         </tr>
         </table>
 <br><br>
-        <h3>Additional Resources</h3>
+        <h4>Additional Resources</h4><br>
     
-        <h4>Machine Learning</h4>
+        <h5>Machine Learning</h5>
         <p><a href="https://developers.google.com/machine-learning/foundational-courses">Google Machine Learning Courses</a></p>
         <p><a href="https://huggingface.co/learn/audio-course/chapter0/introduction">Hugging Face Audio</a></p>
         <p><a href="https://scikit-learn.org/stable/user_guide.html">sci-kit learn User Guide</a></p>
         
-        <h4>Digital Audio</h4>
+        <h5>Digital Audio</h5>
         <p><a href="https://brianmcfee.net/dstbook-site/content/intro.html">Digital Signals Theory</a></p>
         <p><a href="https://learn.flucoma.org/learn/">FluCoMa</a></p>
         
-        <h4>Math</h4>
+        <h5>Math</h5>
         <p><a href="https://www.youtube.com/watch?v=spUNpyF58BY">3Blue1Brown introduction to Fourier transforms.</a></p>
         <p><a href="https://ccrma.stanford.edu/~jos/mdft/">Mathematics of the Discrete Fourier Transform (from CCRMA)</a></p>
         
-        <h4>Useful Libraries</h4>
+        <h5>Useful Libraries</h5>
         <p><a href="https://librosa.org/">Librosa</a></p>
         <p><a href="https://pytorch.org/audio/stable/index.html">torch audio</a></p>
 

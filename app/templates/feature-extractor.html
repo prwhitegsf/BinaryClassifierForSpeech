@@ -1,10 +1,49 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Audio Feature Extraction</h1>
+<div class = "instructions">
+    <h6>View Instructions</h6>
+    <div class="text-box">
+        
+        
+        <div class="instructions-content">
+        <h6>Step 1</h6>
+        <p>Use the dropdowns, multiselect, and radio buttons above the submit button to select samples with those characteristics.</p>
+        <ul>
+            <li>Use ctrl/shift to select multiple emotions.</li>
+            <li>The mel and mfcc selectors respectively control the number of mel filters and the number of mel frequency cepstral coefficients (mfccs) used in feature extraction.</li>
+        </ul>
+            
+             
+        <p> Note: odd numbered actors are male and even numbered actors are female. Selecting actor 2 and setting sex to male will result in a flashed error message. You can simply make another selection if this happens.
+        </p> 
+            <p>  A similar issue arises when specifying the intensity as 2 and the emotion as only neutral. As mentioned in the Data Inspection section, the samples labeled neutral are only recorded with intensity of 1.
+            </p>
+        <h6>Step 2</h6>
+        <p>After making the selection, click the "Submit" button.</p>
+        <ul>
+            <li>This returns a list of records matching the selection.</li>
+            <li>For example: Male actors vocalizing phrase 1 with the emotion happy returns 48 records.</li>
+            <li>The features, along with the audio are loaded for you to view/listen.</li>
+            <li>The text under the audio player displays all the characteristics of the loaded sample.</li>
+        </ul>
+        
+        <h6>Step 3</h6>
+        <p>Use the "Next" button to view and listen to the next record in the group.</p>
+        
+      
+     
+        
+    </div>
+</div>
+</div>
+
 
     <div class="content">
+       
         <div class="content-info">
+            
+            <h5  style="justify-self: center;">Dataset Filters</h5>
             <form method="POST" id="filter-data-form" class="filters"> 
                 
                 {{g.form.csrf_token }}
@@ -84,47 +123,19 @@
                 Current Audio Record ID: {{record_id}}<br>
                 {{record_text}}
             </div>
-
-            <div class="text-box">
-                <h5>Instructions</h5>
-
-                <h6>Step 1</h6>
-                <p>Use the dropdowns, multiselect, and radio buttons above the submit button to select samples with those characteristics.</p>
-                <ul>
-                    <li>Use ctrl/shift to select multiple emotions.</li>
-                    <li>The mel and mfcc selectors respectively control the number of mel filters and the number of mel frequency cepstral coefficients (mfccs) used in feature extraction.</li>
-                </ul>
-                    
-                     
-                <p> Note: odd numbered actors are male and even numbered actors are female. Selecting actor 2 and setting sex to male will result in a flashed error message. You can simply make another selection if this happens.
-                </p> 
-                    <p>  A similar issue arises when specifying the intensity as 2 and the emotion as only neutral. As mentioned in the Data Inspection section, the samples labeled neutral are only recorded with intensity of 1.
-           </p>
-                <h6>Step 2</h6>
-                <p>After making the selection, click the "Submit" button.</p>
-                <ul>
-                    <li>This returns a list of records matching the selection.</li>
-                    <li>For example: Male actors vocalizing phrase 1 with the emotion happy returns 48 records.</li>
-                    <li>The features, along with the audio are loaded for you to view/listen.</li>
-                    <li>The text under the audio player displays all the characteristics of the loaded sample.</li>
-                </ul>
-                
-                <h6>Step 3</h6>
-                <p>Use the "Next" button to view and listen to the next record in the group.</p>
-                
-                <h6>Step 4</h6>
-                <p><a href="{{ url_for('main.about_estimators') }}">Continue to about the estimators.</a></p>
-                
-            </div>
-        
+            
+            <p><a href="{{ url_for('main.about_estimators') }}">Continue to about the estimators.</a></p>
         </div>
         
         <div class="content-viz">
-       
+            <h5 style="justify-self: center;">Record Visualization</h5>
             <img id="plot" src="{{ url_for('static',filename=img_file) }}" alt="Matplotlib Plot" class="responsive-feature-viz">
            
-        </div>  
-
+        </div>
+        
+    
     </div>
+   
+    
 
 {% endblock %}

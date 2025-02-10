@@ -1,10 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
+<div class = "instructions">
+    <h6>View Instructions</h6>
+    <div class="text-box">
+        
+        
+        <div class="instructions-content">
+        <h6>Step 1</h6>
+        <p>The class selector works similarly to the feature extractor, except that it displays up to the first eight records, as either mel spectrograms or mfccs, from the group matching the selection.</p>
+                <p>The "Next" button retrieves the next group of up to eight records that match the filter selection.</p>
+                <p>The Next Audio File button loads the next sample within the returned group into the audio player. You can use the Current Record Audio ID just below this button to match the playing audio to the displayed feature extraction.</p>
 
-<h1>Select Label and View MFCCs</h1>
+                <h5>Train And Test</h5><br>
+                
+                <p>Train the models to identify the selected class and test their performance. Clicking this button will:</p>
+                <ul>
+                    <li>Split the dataset: we will train using 60% of the data and test on the remaining 40%.</li>
+                    <li>Train the models discussed in the estimators section (SVC with linear and rbf kernels, KNN) on the selected class.</li>
+                    <li>Test the trained models on the remaining 40% of data.</li>
+                    <li>Redirect the user to a page displaying these results.</li>
+                </ul>
+                <p>Note: You must make AND SUBMIT a selection in the filter section in order to identify the class we're training the model to identify.</p>
+        
+        
+      
+     
+        
+    </div>
+</div>
+</div>
 
     <div class="content">
         <div class="content-info">
+            <h5  style="justify-self: center;">Dataset Filters</h5>
             <form method="POST" id="filter-data-form" class="filters"> 
                 
                 {{g.form.csrf_token }}
@@ -88,35 +116,13 @@
                 </form>
             </div>
            
-            <div class="record-text">
-                Current Audio Record ID: {{record_id}}<br>
-                {{record_text}}
-            </div>
-            
            
-            <div class="text-box">
-                <h5>Instructions</h5>
-                <p>The class selector works similarly to the feature extractor, except that it displays up to the first eight records, as either mel spectrograms or mfccs, from the group matching the selection.</p>
-                <p>The "Next" button retrieves the next group of up to eight records that match the filter selection.</p>
-                <p>The Next Audio File button loads the next sample within the returned group into the audio player. You can use the Current Record Audio ID just below this button to match the playing audio to the displayed feature extraction.</p>
-
-                <h5>Train And Test</h5><br>
-                
-                <p>Train the models to identify the selected class and test their performance. Clicking this button will:</p>
-                <ul>
-                    <li>Split the dataset: we will train using 60% of the data and test on the remaining 40%.</li>
-                    <li>Train the models discussed in the estimators section (SVC with linear and rbf kernels, KNN) on the selected class.</li>
-                    <li>Test the trained models on the remaining 40% of data.</li>
-                    <li>Redirect the user to a page displaying these results.</li>
-                </ul>
-                <p>Note: You must make AND SUBMIT a selection in the filter section in order to identify the class we're training the model to identify.</p>
-            </div>
         </div>
         
         
         
         <div class="content-viz">
-       
+            <h5 style="justify-self: center;">Record Visualization</h5>
             <img id="plot" src="{{ url_for('static',filename=img_file) }}" alt="Matplotlib Plot" class="responsive-label-viz">
            
         </div>  
