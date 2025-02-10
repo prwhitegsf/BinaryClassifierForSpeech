@@ -125,7 +125,9 @@ class SessionManager():
 
     def clean_audio_folder(self,sess):
         if sess['prev_audio_file'] != None:
-             os.remove('app/static/audio/' + sess['prev_audio_file']+'.wav')
+             fp = 'app/static/audio/' + sess['prev_audio_file']+'.wav'
+             if os.path.exists(fp):
+                os.remove(fp)
 
 
     def check_incompatable_filters(self):
