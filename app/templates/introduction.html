@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="info-container">
+    
+    <div class="info-column">
+
+        <h3>Experimenting with Simple Binary Classification for Audio</h3>
+
+        <h4>Introduction</h4>
+        <p>The project is intended to serve as an introduction to working with audio data in a machine learning context. We will focus on the feature extraction process and a few simple models we can train with those features. The goal is to begin to develop an intuitive understanding of the feature extraction process and how it may relate to/affect successful classification of speech examples according to various characteristics such as emotion, intensity, actor sex, etc.
+        <p>Source code can be found at: git link.</p>
+    
+        <h4>Sections</h4>
+    
+        <h5><a href="{{ url_for('main.data_inspector') }}">Data Inspection</a></h5>
+        <p>The data for our project comes from the speech only portion of the Ryerson Audio-Visual Database of Emotional Speech and Song (RAVDESS) which consisting of 1440 samples recorded by professional actors, each conveying one of eight labeled emotions.</p>
+        <p>In this section we will examine the distributions of the data and discuss some preliminary processing.</p>
+    
+        <h5><a href="{{ url_for('main.about_features') }}">Feature Extraction</a></h5>
+        <p>We discuss why we transform audio before model training and what those transformations look like, with focus on:</p><ul>
+            <li>spectrograms</li>
+            <li>mel frequency spectrograms</li>
+            <li>mel frequency cepstral coefficients (mfccs)</li>
+        </ul>
+        <p>This is followed by an interactive module that allows the user to select examples from RAVDESS, listen to the audio and view the feature extractions.</p>
+         
+    </div>
+    <div class="content-viz">
+
+        <h5><a href="{{ url_for('main.about_estimators') }}">Binary Classification</a></h5>
+        <p>We will use the estimators below to train and evaluate. In this section we give an overview of how they work.</p><ul>
+            
+            <li>Linear SVC algorithm</li>
+            <li>SVC with a radial basis function kernel</li>
+            <li>K-Nearest Neighbor</li>
+        </ul>
+        <p>We also discuss some basic metrics and how we will evaluate the estimators' performance.</p>
+        <p>This is followed by<a href="{{ url_for('main.class_selector') }}"> another interactive module</a> where the user can choose a characteristic (aka label) to train the model to classify. These include:</p>
+        <ul>
+            <li>emotion (any of 8)</li>
+            <li>sex (female/male)</li>
+            <li>phrase</li>
+            <li>intensity</li>
+            <li>actor</li>
+        </ul>
+    
+        <p>After selecting the label that the model will attempt to classify, the user can then train the models and view performance metrics for each estimator. Furthermore, the user can experiment with the feature extraction parameters:</p>
+        <ul>
+            <li>Training the model with mel spectrograms vs mfccs</li>
+            <li>Changing the number of mel frequencies</li>
+            <li>Changing the number of mfcc coefficients</li>
+        </ul>
+        <h5><a href="{{ url_for('main.observations') }}">Observations and Additional Resources</a></h5>
+        <p>Finally, we will look at some of the aggregated results of our training and testing, noting how the estimators perform with different feature types, feature resolutions, and classification tasks. 
+            At the end of this section there are number of links for those wishing to dive deeper into audio machine learning.
+        </p>
+
+    
+        <h4>What we will not be doing</h4>
+        <p><strong>Training models for real-world tasks:</strong></p>
+      
+        <p>    The RAVDESS dataset is great for our needs as the audio is cleaned, labeled, well recorded, etc. 
+                However, the cleanliness of that audio is not reflective of most real-world situations.
+                Typically, we would add some noise, reverb and filtering to the signal, a process known as data augmentation, to better simulate the real world.</p>
+                
+        <p>Here we want to work with clean data as we are trying to develop some intuition about how the feature extraction process reduces our data to the characteristics we are most concerned with here.</p>
+
+    
+        <p><strong>Tweaking hyperparameters/fine tuning our models:</strong></p>
+        
+        <p>    Again, we're not trying to make a real world prediction system; we are intentionally limiting ourselves to basics in order to better understand the impacts of feature extraction.</li>
+        </p>
+    
+        <p><strong>Working with newer/larger/more advanced models</strong></p>
+        <p>
+        We won't dive into neural networks, transformers, embeddings, LLMs. For a nice overview of the audio models out there check out the <a href="https://huggingface.co/learn/audio-course/chapter0/introduction" target="_blank">Hugging Face audio course.</a>
+    </p>
+    <br>
+    <p>Continue to the <a href="{{ url_for('main.data_inspector') }}">data inspection section</a></p>
+    <br><br>
+    </div>
+  
+    
+</div>
+
+{% endblock %}

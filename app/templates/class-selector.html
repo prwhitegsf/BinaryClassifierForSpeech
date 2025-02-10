@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Select Label and View MFCCs</h1>
+
+    <div class="content">
+        <div class="content-info">
+            <form method="POST" id="filter-data-form" class="filters"> 
+                
+                {{g.form.csrf_token }}
+                
+                <div class="first-row">
+                    
+                    <div class="dropdown-unit">
+                        actor<br>
+                        <span>{{ g.form.actor(class="dropdown-element") }}</span>
+                    </div>
+
+                    <div class="dropdown-unit">
+                        sex<br>
+                        <span>{{ g.form.sex(class="dropdown-element") }}</span>
+                    </div>    
+
+                    <div class="dropdown-unit">
+                        phrase<br>
+                        <span>{{ g.form.statement(class="dropdown-element")  }}</span>
+                        
+                    </div> 
+
+                    <div class="dropdown-unit">
+                        intensity<br>
+                        <span>{{ g.form.intensity(class="dropdown-element") }}</span>
+                    </div> 
+                    
+                </div>
+                
+                <div class="second-row">
+                    <p >
+                        emotion<br>
+                        <span>  {{ g.form.emotion }}</span>
+                    </p>
+                    <div class="dropdown-unit">
+                        feature type<br>
+                        <span>{{ g.form.feature_type(class="dropdown-element") }}</span>
+                    </div> 
+                    <p >
+                        mels<br>
+                        {% for subfield in g.form.num_mels %}
+                                    
+                            {{subfield}}
+                            {{subfield.label}}<br>
+                                    
+                        {% endfor %}
+                    </p>
+
+                    <p >
+                        mfccs<br>
+                        {% for subfield in g.form.num_mfcc %}
+                                    
+                            {{subfield}}
+                            {{subfield.label}}<br>
+                                    
+                        {% endfor %}
+                    </p>
+                    
+                </div>    
+                    
+                <div >{{ g.form.submit(class="submit-button") }}</div>
+            
+            </form>
+                
+            
+            
+            <div class="record-nav">
+
+                <form method="POST" id="next-button" >                     
+                 
+                    <span>{{ next_group.next  }}</span> 
+                    <span>{{ record_count_text}}  </span>
+                        
+                </form>
+
+                <audio id="audio-player" controls src= "{{ url_for('static',filename=audio_file) }}"></audio> 
+               
+                <form method="POST" id="next-button" >
+                    <span> {{ next_audio_file.next_audio_file }}</span>  
+                    <span>{{ train_and_test.train_and_test(class="train-and-test") }}</span>
+                </form>
+            </div>
+           
+            <div class="record-text">
+                Current Audio Record ID: {{record_id}}<br>
+                {{record_text}}
+            </div>
+            
+           
+            <div class="text-box">
+                <h5>Instructions</h5>
+                <p>The class selector works similarly to the feature extractor, except that it displays up to the first eight records, as either mel spectrograms or mfccs, from the group matching the selection.</p>
+                <p>The "Next" button retrieves the next group of up to eight records that match the filter selection.</p>
+                <p>The Next Audio File button loads the next sample within the returned group into the audio player. You can use the Current Record Audio ID just below this button to match the playing audio to the displayed feature extraction.</p>
+
+                <h5>Train And Test</h5><br>
+                
+                <p>Train the models to identify the selected class and test their performance. Clicking this button will:</p>
+                <ul>
+                    <li>Split the dataset: we will train using 60% of the data and test on the remaining 40%.</li>
+                    <li>Train the models discussed in the estimators section (SVC with linear and rbf kernels, KNN) on the selected class.</li>
+                    <li>Test the trained models on the remaining 40% of data.</li>
+                    <li>Redirect the user to a page displaying these results.</li>
+                </ul>
+                <p>Note: You must make AND SUBMIT a selection in the filter section in order to identify the class we're training the model to identify.</p>
+            </div>
+        </div>
+        
+        
+        
+        <div class="content-viz">
+       
+            <img id="plot" src="{{ url_for('static',filename=img_file) }}" alt="Matplotlib Plot" class="responsive-label-viz">
+           
+        </div>  
+
+    </div>
+
+{% endblock %}

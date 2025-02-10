@@ -1,0 +1,357 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="info-container">
+    <div class="info-column">
+        <h3>Observations and Additional Resources</h3>
+        <br>
+
+    <h4>Feature Types and Resolution</h4>
+    <p>Training and testing on mfcc features resulted in better performance across almost all classification tasks than training/testing on mel spectrograms, especially with the SVC-RBF model. Given that we are working with speech data, where the information tends to be encoded in the phenomes and formants, this makes sense. MFCCs specifically capture and highlight that information.</p>
+    <p>Furthermore, for this set of data and tasks there was no meaningful performance difference to be found in adjusting the number of mel filters or the number of mfccs.</p>
+
+    <h4>Classifications</h4>
+    <p>All of the models using mfccs were able to classify examples according to the actor's sex quite well with all recall and precision scores > 0.95. Interestingly, the SVC using the RBF kernel (RBF model) drops from 0.99 recall and precision to 0.82 and 0.86 respectively when using mel spectrograms, while the SVC model with the linear kernel (LINEAR model) and the KNN model achieve results similar to the iterations trained/tested using mfccs.</p>
+    
+    <p>Using mfccs, the RBF model achieves strong results in identifying individual actors, with 0.87 recall and 0.86 precision. The LIN and KNN models exhibit decent performance. The LINEAR model is stronger on recall than precision (0.88/0.62) while the KNN model is the opposite (0.68/0.87). That relationship holds for models trained on mel spectrograms, though precision takes a massive hit on both RBF and LINEAR at 0.12 and 0.18, respectively.</p>
+    
+    <p>When classifying the phrase with mfccs, both the RBF and LINEAR models achieve strong recall scores ~0.9, but are prone to false positives, with precision scores around 0.5. Using mel spectrograms, the recall scores drop to 0.71 (RBF) and 0.78 (LINEAR), though the precision scores stay similar. The KNN model scores poorly, around 0.5 on both metrics and its performance here is similar whether using mfccs or mel-spectrograms.</p>
+    
+    <p>Likewise, in classifying intensity, both RBF and LINEAR produced decent recall scores, while being prone to false positives. Again, using the mel spectrograms results in degraded performance, though more noticeably in the RBF model. The KNN model using mfccs here gives decent and balanced performance here with recall at 0.7 and precision at 0.73.</p>
+    
+    <p>Overall performance on classifying emotions is lackluster. With the RBF and Linear models in particular false positives present a problem with precision scores < 0.5 KNN also performs poorly but struggled with recall more than precision.</p>
+    
+    <p>Interestingly, when looking at performance across all emotions, the RBF model posted similar recall scores for runs using mfccs and runs using mel spectrograms.</p>
+
+    <h3>Aggregated Results</h3>
+    <p>The following tables give the average performance of each estimator in terms of recall and precision when trained and tested on a single label. We omit accuracy because with particularly unbalanced sets accuracy can be misleading.</p>
+    <ul>
+        <li>For example, there are only 60 examples per actor; a model could fail to identify any true positives and still have an accuracy rate > 0.9.</li>
+    </ul>
+
+    <p>For each class type, we trained and tested the models on each possible label while keeping the rest of the class types at their default "all." Furthermore, each label was trained and tested across a range of values for:</p>
+    <ul>
+        <li>the number of mel spectrogram filters</li>
+        <li>the number of mfccs</li>
+    </ul>
+
+    <p>The table below represents the average performance of each estimator across all labels of the class type and across all mel spectrogram and mfcc values. The results for training/testing on mfcc features and mel spectrogram features are listed separately.</p>
+    <ul>
+        <li>For example: for actors we train and test the model to identify each of the 24 actors individually and then average the results.</li>
+    </ul>
+
+    <h4>Averaged Results by Class</h4>
+<br>
+    <h5>MFCC</h5>
+    <table>
+        <tr>
+            <th>Class-type</th>
+            <th>RBF-Recall</th>
+            <th>RBF-Precision</th>
+            <th>Linear-Recall</th>
+            <th>Linear-Precision</th>
+            <th>KNN-Recall</th>
+            <th>KNN-Precision</th>
+        </tr>
+        <tr>
+            <td>actor</td>
+            <td>0.87</td>
+            <td>0.86</td>
+            <td>0.88</td>
+            <td>0.62</td>
+            <td>0.68</td>
+            <td>0.87</td>
+        </tr>
+        <tr>
+            <td>sex</td>
+            <td>0.99</td>
+            <td>0.99</td>
+            <td>0.98</td>
+            <td>0.97</td>
+            <td>0.97</td>
+            <td>0.97</td>
+        </tr>
+        <tr>
+            <td>phrase</td>
+            <td>0.91</td>
+            <td>0.53</td>
+            <td>0.88</td>
+            <td>0.54</td>
+            <td>0.51</td>
+            <td>0.54</td>
+        </tr>
+        <tr>
+            <td>intensity</td>
+            <td>0.89</td>
+            <td>0.64</td>
+            <td>0.86</td>
+            <td>0.58</td>
+            <td>0.7</td>
+            <td>0.73</td>
+        </tr>
+        <tr>
+            <td>emotion</td>
+            <td>0.72</td>
+            <td>0.45</td>
+            <td>0.71</td>
+            <td>0.3</td>
+            <td>0.42</td>
+            <td>0.61</td>
+        </tr>
+    </table>
+<br><br>
+    <h5>Mel-Spectrogram</h5>
+    <table>
+        <tr>
+            <th>Class-type</th>
+            <th>RBF-Recall</th>
+            <th>RBF-Precision</th>
+            <th>Linear-Recall</th>
+            <th>Linear-Precision</th>
+            <th>KNN-Recall</th>
+            <th>KNN-Precision</th>
+        </tr>
+        <tr>
+            <td>actor</td>
+            <td>0.76</td>
+            <td>0.12</td>
+            <td>0.77</td>
+            <td>0.18</td>
+            <td>0.31</td>
+            <td>0.51</td>
+        </tr>
+        <tr>
+            <td>sex</td>
+            <td>0.82</td>
+            <td>0.86</td>
+            <td>0.94</td>
+            <td>0.94</td>
+            <td>0.92</td>
+            <td>0.93</td>
+        </tr>
+        <tr>
+            <td>phrase</td>
+            <td>0.71</td>
+            <td>0.45</td>
+            <td>0.78</td>
+            <td>0.51</td>
+            <td>0.52</td>
+            <td>0.57</td>
+        </tr>
+        <tr>
+            <td>intensity</td>
+            <td>0.71</td>
+            <td>0.58</td>
+            <td>0.8</td>
+            <td>0.56</td>
+            <td>0.62</td>
+            <td>0.66</td>
+        </tr>
+        <tr>
+            <td>emotion</td>
+            <td>0.71</td>
+            <td>0.25</td>
+            <td>0.64</td>
+            <td>0.25</td>
+            <td>0.26</td>
+            <td>0.42</td>
+        </tr>
+    </table>
+    <br><br>
+    <h4>Averaged Results for Each Emotion</h4>
+    <p>As with the above, all other class types were set to "all" as we trained and tested the model on each emotional label individually.</p>
+
+    <h5>MFCC</h5>
+    <table>
+        <tr>
+            <th>Emotion</th>
+            <th>RBF-Recall</th>
+            <th>RBF-Precision</th>
+            <th>Linear-Recall</th>
+            <th>Linear-Precision</th>
+            <th>KNN-Recall</th>
+            <th>KNN-Precision</th>
+        </tr>
+        <tr>
+            <td>angry</td>
+            <td>0.73</td>
+            <td>0.57</td>
+            <td>0.79</td>
+            <td>0.42</td>
+            <td>0.37</td>
+            <td>0.66</td>
+        </tr>
+        <tr>
+            <td>calm</td>
+            <td>0.89</td>
+            <td>0.54</td>
+            <td>0.83</td>
+            <td>0.4</td>
+            <td>0.62</td>
+            <td>0.74</td>
+        </tr>
+        <tr>
+            <td>disgust</td>
+            <td>0.7</td>
+            <td>0.45</td>
+            <td>0.64</td>
+            <td>0.25</td>
+            <td>0.4</td>
+            <td>0.7</td>
+        </tr>
+        <tr>
+            <td>fearful</td>
+            <td>0.67</td>
+            <td>0.44</td>
+            <td>0.71</td>
+            <td>0.3</td>
+            <td>0.37</td>
+            <td>0.55</td>
+        </tr>
+        <tr>
+            <td>happy</td>
+            <td>0.59</td>
+            <td>0.38</td>
+            <td>0.65</td>
+            <td>0.24</td>
+            <td>0.28</td>
+            <td>0.54</td>
+        </tr>
+        <tr>
+            <td>sad</td>
+            <td>0.67</td>
+            <td>0.37</td>
+            <td>0.68</td>
+            <td>0.27</td>
+            <td>0.29</td>
+            <td>0.53</td>
+        </tr>
+        <tr>
+            <td>surprised</td>
+            <td>0.79</td>
+            <td>0.41</td>
+            <td>0.65</td>
+            <td>0.21</td>
+            <td>0.62</td>
+            <td>0.57</td>
+        </tr>
+        <tr>
+            <td>neutral</td>
+            <td>0.73</td>
+            <td>0.28</td>
+            <td>0.73</td>
+            <td>0.17</td>
+            <td>0.33</td>
+            <td>0.46</td>
+        </tr>
+    </table>
+<br><br>
+<h5>Mel Spectrogram</h5>
+    <table>
+        <tr>
+            <th>Emotion</th>
+            <th>RBF-Recall</th>
+            <th>RBF-Precision</th>
+            <th>Linear-Recall</th>
+            <th>Linear-Precision</th>
+            <th>KNN-Recall</th>
+            <th>KNN-Precision</th>
+        </tr>
+        <tr>
+            <td>angry</td>
+            <td>0.58</td>
+            <td>0.46</td>
+            <td>0.53</td>
+            <td>0.5</td>
+            <td>0.34</td>
+            <td>0.66</td>
+        </tr>
+        <tr>
+            <td>calm</td>
+            <td>0.96</td>
+            <td>0.21</td>
+            <td>0.95</td>
+            <td>0.29</td>
+            <td>0.46</td>
+            <td>0.5</td>
+        </tr>
+        <tr>
+            <td>disgust</td>
+            <td>0.92</td>
+            <td>0.16</td>
+            <td>0.81</td>
+            <td>0.17</td>
+            <td>0.19</td>
+            <td>0.34</td>
+        </tr>
+        <tr>
+            <td>fearful</td>
+            <td>0.31</td>
+            <td>0.34</td>
+            <td>0.31</td>
+            <td>0.29</td>
+            <td>0.24</td>
+            <td>0.41</td>
+        </tr>
+        <tr>
+            <td>happy</td>
+            <td>0.34</td>
+            <td>0.23</td>
+            <td>0.24</td>
+            <td>0.19</td>
+            <td>0.18</td>
+            <td>0.33</td>
+        </tr>
+        <tr>
+            <td>sad</td>
+            <td>0.93</td>
+            <td>0.18</td>
+            <td>0.85</td>
+            <td>0.19</td>
+            <td>0.19</td>
+            <td>0.32</td>
+        </tr>
+        <tr>
+            <td>surprised</td>
+            <td>0.9</td>
+            <td>0.16</td>
+            <td>0.77</td>
+            <td>0.16</td>
+            <td>0.21</td>
+            <td>0.36</td>
+        </tr>
+        <tr>
+            <td>neutral</td>
+            <td>0.96</td>
+            <td>0.1</td>
+            <td>0.9</td>
+            <td>0.13</td>
+            <td>0.22</td>
+            <td>0.31</td>
+        </tr>
+        </table>
+<br><br>
+        <h3>Additional Resources</h3>
+    
+        <h4>Machine Learning</h4>
+        <p><a href="https://developers.google.com/machine-learning/foundational-courses">Google Machine Learning Courses</a></p>
+        <p><a href="https://huggingface.co/learn/audio-course/chapter0/introduction">Hugging Face Audio</a></p>
+        <p><a href="https://scikit-learn.org/stable/user_guide.html">sci-kit learn User Guide</a></p>
+        
+        <h4>Digital Audio</h4>
+        <p><a href="https://brianmcfee.net/dstbook-site/content/intro.html">Digital Signals Theory</a></p>
+        <p><a href="https://learn.flucoma.org/learn/">FluCoMa</a></p>
+        
+        <h4>Math</h4>
+        <p><a href="https://www.youtube.com/watch?v=spUNpyF58BY">3Blue1Brown introduction to Fourier transforms.</a></p>
+        <p><a href="https://ccrma.stanford.edu/~jos/mdft/">Mathematics of the Discrete Fourier Transform (from CCRMA)</a></p>
+        
+        <h4>Useful Libraries</h4>
+        <p><a href="https://librosa.org/">Librosa</a></p>
+        <p><a href="https://pytorch.org/audio/stable/index.html">torch audio</a></p>
+
+
+    </div>
+</div>
+
+
+{% endblock %}

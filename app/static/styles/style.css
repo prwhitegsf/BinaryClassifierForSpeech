@@ -1,0 +1,299 @@
+/* add h1 at some point */
+
+
+
+.content {
+    
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 400px));
+    
+}
+
+.content content-info{
+    
+    display: grid;
+    grid-template-rows: 3in 1.5in 5in;
+    margin: 10px;
+    padding: 10px;
+    gap: 10px;
+
+}
+
+.content content-viz{
+    justify-content: center;
+}
+
+
+
+
+.filters{
+    margin: 5px;
+    padding: 0;
+    display: grid;
+    grid-template-rows: auto auto auto;
+}
+
+.first-row{
+    display: grid;
+    grid-template-columns: 80px 80px 80px 80px;
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+
+}
+
+.first-row dropdown-unit{
+    justify-items: center;
+    display: grid;
+    grid-template-rows: 30px auto;
+}
+
+.first-row dropdown-element{
+    width: 80px;
+}
+
+
+.second-row{
+    display: grid;
+    grid-template-columns: 100px 100px 80px 80px;
+    justify-content: space-between;
+    margin-bottom: 15px;
+
+}
+
+
+.submit-button{
+    width: 100%;
+    background-color: rgb(30, 78, 210);
+    color: aliceblue;
+   
+}
+
+
+.estimator-results{
+    display: grid;
+    grid-template-columns: 45% 55%;
+    justify-content: space-between;
+
+}
+
+.conf-matrix{
+    margin: 5px;
+    align-self: self-start;
+}
+
+.score-table{
+    margin: 5px;
+}
+
+
+.responsive-feature-viz {
+    max-width: 100%;
+    height: auto;
+  }
+
+
+.responsive-label-viz {
+    max-width: 120%;
+    height: auto;
+  }
+
+
+
+
+
+
+.text-box{
+    font-size: 0.85em;
+    margin: 10px;
+    padding: 10px;
+    
+}
+
+.flashes{
+    color: red;
+}
+
+
+.record-nav{
+    
+    grid-template-rows: auto auto;
+    align-content: start;
+    justify-content: space-between;
+    margin-top: 15px;
+   
+}
+
+.record-text{
+    font-size: 0.75em;
+    margin: 10px;
+    padding: 10px;
+}
+
+
+
+.train-and-test{
+    background-color: rgb(255, 0, 0);
+    color: white;
+}
+
+
+#next-button{
+
+    margin: 5px;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+ 
+}
+
+#audio-player{
+
+    margin: 5px;
+    width: 100%;
+    height: 50px;
+}
+
+th, td {
+    padding: 5px;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 12px;
+  }
+
+
+  .info-container {
+    max-width: 800px; /* Adjust this width as needed */
+    margin: 0 auto;
+    padding: 0 20px; /* Creates some space on small screens */
+  }
+  
+  .info-column {
+    /* Add styling for individual columns if needed */
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .two-column-row {
+    display: grid;
+    
+    grid-template-columns: 45% 55%;
+    justify-content: space-between;
+     /* gap: 20px; Space between columns */
+    margin-top: 2px; /* Space between single column and two columns */
+    align-items: start;
+  }
+
+  .tcr-left{
+    
+    margin: 5px 20px 5px 5px;
+  }
+
+  .tcr-right{
+    margin: 5px;
+    margin-left: 40px;
+  }
+  
+  /* For mobile screens */
+  @media (max-width: 800px) {
+    .two-column-row {
+      grid-template-columns: 1fr; /* Stack columns on mobile */
+    }
+
+    .tcr-right{
+        margin: 5px;
+        margin-left: 5px;
+      }
+  }
+
+
+figcaption{
+    font-style: italic;
+    font-size: small;
+}
+
+
+
+/* Navigation */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+}
+
+.logo {
+    font-size: 1.5em;
+}
+
+/* Hamburger icon */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: rgb(0, 0, 0);
+    margin: 3px 0;
+    transition: 0.4s;
+}
+
+/* Navigation menu   */
+.nav-menu {
+    display: flex;
+    list-style: none;
+}
+
+.nav-menu li {
+    margin-left: 20px;
+}
+
+.nav-menu a {
+    color: rgb(94, 137, 255);
+    text-decoration: none;
+}
+
+/* Responsive breakpoint */
+@media screen and (max-width: 1500px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        background-color: #ffffff;
+        text-align: start;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-menu li {
+        margin: 10px 0;
+    }
+
+    /* Hamburger icon animation */
+    .hamburger.active .bar:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+}

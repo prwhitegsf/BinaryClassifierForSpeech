@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Estimator Results</h1>
+
+    <div class="content",style=>
+        <div class="content-info">
+            <img id="plot" src="{{ url_for('static',filename=img_file) }}" alt="Matplotlib Plot" class="responsive-label-viz">
+            <div class="text-box">
+            {% for attr in label_info %}
+                {{attr}}<br>
+            {% endfor %}
+            </div>
+            
+                <h5>Next:</h5>
+                <div class="text-box">
+                <p>Continue to <a href="{{ url_for('main.observations') }}">Observations and Additional Resources</a>.</p>
+                <p>Or, go back to the <a href="{{ url_for('main.class_selector') }}">class selector</a> and make another selection.</p>
+            </div>
+        
+        </div>
+        
+        <div class="content-viz">
+            <p id="'svc-results">
+                SVC Results<br>
+                <div class="estimator-results">
+                    
+                    <div class="conf-matrix">
+                        <table>
+                            <tr>
+                                <td style="background-color: rgb(39, 255, 39);">TN: {{ svc_res[0] }}</td>
+                                <td style="background-color: rgb(255, 101, 101);">FP: {{ svc_res[1] }}</td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: rgb(255, 101, 101);">FN: {{ svc_res[2] }}</td>
+                                <td style="background-color: rgb(39, 255, 39);">TP: {{ svc_res[3] }}</td>
+                            </tr>
+                        </table>     
+                    </div>
+                    <div class="score-table">
+                        <table>
+                            <tr>
+                                <th>Recall</th>
+                                <th>Precision</th>
+                                <th>Accuracy</th>
+                            </tr>
+                            <tr>
+                                {% for val in svc_scores %}
+                                <td>{{val}}</td>
+                                {% endfor %}
+                            </tr>    
+                        </table>
+                    </div>
+                </div>
+            </p> 
+
+            <p>
+            LinearSVC Results<br>
+            <div class="estimator-results">
+                <div class="conf-matrix">
+                    <table>
+                        <tr>
+                            <td style="background-color: rgb(39, 255, 39);">TN: {{ linsvc_res[0] }}</td>
+                            <td style="background-color: rgb(255, 101, 101);">FP: {{ linsvc_res[1] }}</td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: rgb(255, 101, 101);">FN: {{ linsvc_res[2] }}</td>
+                            <td style="background-color: rgb(39, 255, 39);">TP: {{ linsvc_res[3] }}</td>
+                        </tr>
+                    </table>     
+                </div>
+                <div class="score-table">
+                    <table>
+                        <tr>
+                            <th>Recall</th>
+                            <th>Precision</th>
+                            <th>Accuracy</th>
+                        </tr>
+                    
+                        <tr>
+                            {% for val in linsvc_scores %}
+                            <td>{{val}}</td>
+                            {% endfor %}
+                        </tr> 
+                                                
+                    
+                    </table>
+                </div>
+            </div>
+            </p>
+
+            <p>
+                K Nearest Neighbor Results<br>
+                <div class="estimator-results">
+                    <div class="conf-matrix">
+                        <table>
+                            <tr>
+                                <td style="background-color: rgb(39, 255, 39);">TN: {{ knn_res[0] }}</td>
+                                <td style="background-color: rgb(255, 101, 101);">FP: {{ knn_res[1] }}</td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: rgb(255, 101, 101);">FN: {{ knn_res[2] }}</td>
+                                <td style="background-color: rgb(39, 255, 39);">TP: {{ knn_res[3] }}</td>
+                            </tr>
+                        </table>     
+                    </div>
+                    <div class="score-table">
+                        <table>
+                            <tr>
+                                <th>Recall</th>
+                                <th>Precision</th>
+                                <th>Accuracy</th>
+                            </tr>
+                            <tr>
+                                {% for val in knn_scores %}
+                                <td>{{val}}</td>
+                                {% endfor %}
+                            </tr> 
+                        </table>
+                    </div>
+                </div>
+            </p>
+        </div>  
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="info-container">
+    <div class="info-column">
+
+        <h3>Estimators and measuring performance</h3>
+
+  
+        <p>We use three simple estimators from the scikit-learn library (add links)</p>
+        <ul>
+            <li>SVC with the Linear kernel</li>
+            <li>SVC with the Radial Basis Function kernel</li>
+            <li>K Nearest Neighbor</li>
+        </ul>
+    
+        <h4>Support Vector Classifiers</h4>
+        <p>Support vector classification is a machine learning technique where data points are represented as vectors, often in a high-dimensional space, with each dimension corresponding to a different feature or attribute. The algorithm works by finding a decision boundary (typically a hyperplane) that optimally separates different classes of data points in this feature space.</p>
+        <p><figure> <img src="{{ url_for('static',filename=hyperplanes) }}"><figcaption><a href="https://www.ee.columbia.edu/~sfchang/course/spr/papers/guo-li-svm-audio00.pdf" target="_blank">From "Content-Based Audio Classification and Retrieval by Support Vector Machines" by Guo and Li (2003)</a></figcaption> </figure></p>
+        <h5>SVC with linear kernel vs SVC with Radial Basis Function kernel</h5>
+        <p>The primary difference between using a linear and radial basis function kernel is that linear kernels create a decision boundary that is a straight line or in the higher dimensions a flat hyperplane.</p>
+        <p>A radial basis function on the other hand can create a curved line/hyperplane.</p>
+        <ul>
+            <li>In "Content-Based Audio Classification and Retrieval by Support Vector Machine", the authors outline a set of kernel functions used to map the linear input space of the SVM to a multidimensional feature space. In particular they found through experimentation that using an exponential radial basis function (ERBF) resulted in the best model performance (Guo & Li, 2003).</li>
+            <li>include any settings for SVC/Linear SVC (ie, balanced etc)</li>
+        </ul>
+        <p><figure> <img src="{{ url_for('static',filename=kernels) }}" ><figcaption><a href="https://scikit-learn.org/stable/modules/svm.html" target="_blank">From the sklearn user guide section on SVM kernels.</a></figcaption> </figure></p>
+        <h4>K Nearest Neighbor (KNN)</h4>
+        <p>KNN is a simple algorithm used for classification assumes similar items are closer together in the feature space. It doesn't generalize like SVCs. With the SVC models we train them on a set of data, then we get a set of model weights that we can use to get a prediction back.</p>
+        <p>Instead with KNN, when we pass an example:</p>
+        <ul>
+            <li>It computes the "distance" to the examples in our "training" set. Typically, this is the Euclidean distance between each data point in our example feature vector and the corresponding point in each of the rest of the feature vectors in the set.</li>
+                
+            </li>
+            <li>It finds the n (a number chosen by the user) closest examples in the set and gives each one a "vote," which simply consists of the label attacvhed to that example.
+             
+            </li>
+            <li>The sample we want a prediction for is classified according to whichever class has the majority of votes.
+                
+                    <li>For example: Imagine we want to classify the RAVDESS samples according to actor sex using KNN. We will set the number of neighbors (n) to 5.</li>
+                    <ul>
+                    <li>After passing our sample to KNN it calculates the distance from our sample to the examples in the "training" set.</li>
+                    <li>The algorithm then looks at the labels of the 5 closest examples.</li>
+                    <li>From those 5 examples, if 3 are female and 2 are male, our sample will be classified as female.</li>
+                    <li>Conversely, if 2 are female and 3 are male, our sample will be classified as male.</li>
+                </ul>
+            </li>
+        </ul>
+    
+        <h4>Testing and Performance Metrics</h4>
+        <p>While there are many ways of evaluating estimator performance, we will keep it simple and direct focusing on a confusion matrix and three metrics derived from it: recall, precision, and accuracy.</p>
+        <p>Returning to the example of actor sex, assume we've trained our model to identify female actors.</p>
+        <p>A confusion matrix, like the one below, simply tells us how many:</p>
+        <ul>
+            <li>True Positives (TP = 70): The actor is female. The model correctly identifies the actor as female.</li>
+            <li>False Positives (FP = 32): The actor is male. The model incorrectly identifies the actor as female.</li>
+            <li>True Negatives (TN = 455): The actor is male. The model correctly identifies the actor as male.</li>
+            <li>False Negatives (FN = 19): The actor is female. The model incorrectly identifies the actor as male.</li>
+        </ul>
+        <p> <img src="{{ url_for('static',filename=conf_matrix) }}" > </p>
+        <p>We then use those values to derive:</p>
+        <ul>
+            <li>Recall = TP / (TP + FN) = 0.78
+                <ul>
+                    <li>Measures the ratio of positive classes the model correctly identifies.</li>
+                </ul>
+            </li>
+            <li>Precision = TP / (TP + FP) = 0.69
+                <ul>
+                    <li>Measures how often the model is correct when identifying the positive class.</li>
+                </ul>
+            </li>
+            <li>Accuracy = (TP + TN) / (TP + TN + FP + FN) = 0.91
+                <ul>
+                    <li>Measures the ratio of examples the model correctly identified.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <p><h5>Next: </h5><br>
+            Continue to <a href="{{ url_for('main.class_selector') }}">the interactive class selector.</a></p>
+
+    </div>
+</div>
+
+{% endblock %}

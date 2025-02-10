@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="info-container">
+    <div class="info-column">
+
+        <h4>Data Inspection</h4>
+        
+        <p>We use the speech-only portion of the <a href="https://zenodo.org/records/1188976">Ryerson Audio-Visual Database of Emotional Speech and Song </a>(RAVDESS)
+        which consists of 1440 samples:</p>
+        
+            <div class="two-column-row">
+            
+                <div class="tcr-left">
+                    <h5>Actor Sex</h5><br>
+                    Recorded by 24 actors:
+                    <ul>
+                        <li>half female, half male</li>
+                    </ul>
+                </div>
+                <div class="tcr-right">
+                    <img src="{{ url_for('static',filename=sex_distro) }}" > 
+                    
+                </div>
+        
+            </div>
+
+            <div class="two-column-row">
+                <h5>Phrases</h5><br>
+                <div class="tcr-left">
+                    Two lexically matched statements:
+                    <ul>
+                        <li>Phrase 1: "Kids are talking by the door."</li>
+                        <li>Phrase 2: "Dogs are sitting by the door."</li>
+                        
+                    </ul>
+                </div>
+                <div class="tcr-right">
+                    <img src="{{ url_for('static',filename=phrase_distro) }}" > 
+                </div>
+            
+                
+            </div>
+
+            <div class="two-column-row">
+                <h5>Emotions</h5><br>
+                <div class="tcr-left">
+                    The set is classified into 8 separate emotions:
+                    <ul>
+                        <li>neutral, calm, happy, sad, angry, fearful, disgusted, surprised</li>
+                    </ul>
+                   
+                </div>
+                <div class="tcr-right">
+                    <img src="{{ url_for('static',filename=emotion_distro) }}" >
+                </div>     
+            </div>
+
+            <div class="two-column-row">
+                <div class="tcr-left">
+                    <h5>Intensity</h5><br>
+                    Each statement is expressed using each emotion twice:
+                    <ul>
+                        <li>once at lower intensity</li>
+                        <li>once at higher intensity</li>
+                        <li>The emotion category "neutral" only has 1 intensity, hence the uneven distributions in both the emotions and intensities.</li>
+                    </ul>
+                    
+                </div>
+                <div class="tcr-right">
+                    <img src="{{ url_for('static',filename=intensity_distro) }}" > 
+                </div>
+            </div>
+
+            
+            
+        
+    
+        <br><br>
+        <div class="two-column-row">
+            
+       
+    <div class="tcr-left">
+        <h5>Data Pre-Processing</h5>
+        <p>Before moving to the feature extraction process, we reduce the size of our data by trimming each sample to 2.5 seconds and resampling the file to 16kHz.</p>
+        <p>Trimming removes the silence at the beginning and allows us to work with smaller files, resulting in faster feature extraction and training. For our purposes, the silence at the beginning doesn't contain any useful information.</p>
+        
+        <p>We downsample the examples from 48kHz to 16kHz for similar reasons. There's not much speech information above 8kHz, so we can get rid of that information and in the process, we are feeding the model more of the information that's important to our application and less of the noise. </p>  
+       
+         
+        
+    </div>
+    <div class="tcr-right">
+        <h5>Validation Process</h5>
+        <p>Each sample was rated by individuals from a pool of 349 participants ten times. Information on perceptual validation can be found <a href="https://doi.org/10.1371/journal.pone.0196391">here</a>.</p>
+        <br>
+        <h5>Next:</h5><br>
+        Continue to learn <a href="{{ url_for('main.about_features') }}">about feature extraction.</a>
+    
+    </div>
+    </div>
+    
+    </div>
+</div>
+
+{% endblock %}
