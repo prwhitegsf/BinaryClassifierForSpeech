@@ -4,12 +4,17 @@ from sqlalchemy.sql import func
 from sqlalchemy_utils import database_exists, create_database
 from app.main.models import User
 
-from config import Config 
+import os
+from dotenv import load_dotenv
 
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+load_dotenv(os.path.join(basedir, '.env'))
+db_uri = os.environ.get('DATABASE_URL')
 
 def get_engine(dbname):
-        engine = create_engine(f'postgresql+psycopg2://postgres:abc@localhost/{dbname}')
-        #engine = create_engine(f'postgresql://postgres:abc@db:5432/{db_name}')
+        
+        engine = create_engine(db_uri+dbname)
         if not database_exists(engine.url):
             create_database(engine.url)
         return engine
