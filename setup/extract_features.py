@@ -19,8 +19,6 @@ def get_mel_spectrogram(wav,n_mels):
     return melspectrogram
 
 
-
-
 def write_mfcc_to_npy(file_list, mels, mfcc):
 
     for n_mels in mels:
@@ -54,7 +52,10 @@ def write_mels_to_npy(file_list, mels):
             with open(f'datasets/RAVDESS/features/mel/ravdess_{n_mels}.npy', 'wb') as f:
                 np.save(f, np.array(df))
 
-
+# Make dirs for features if they don't exist
+if not os.path.exists('datasets/RAVDESS/features/mfcc'):
+    os.makedirs('datasets/RAVDESS/features/mfcc')
+    os.makedirs('datasets/RAVDESS/features/mel')
 
 dbname = 'app'
 

@@ -22,6 +22,11 @@ def create_app(config_class=Config):
     from app.main import bp as main_bp
     app.register_blueprint(main_bp) 
 
+    # setup static/audio folder
+    if not os.path.exists('app/static/audio'):
+        os.makedirs('app/static/audio')
+    
+
 
     if not app.debug and not app.testing:
 

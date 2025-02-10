@@ -31,8 +31,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-abc/
-.abc/
+
 
 # Unit test / coverage reports
 htmlcov/
